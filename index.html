@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+    <script>
+        // Aplica o tema salvo no localStorage ao carregar a página
+        function aplicarTema() {
+            const tema = localStorage.getItem("tema") || "claro";
+            document.body.className = tema;
+        }
+
+        // Mostra alerta ao cadastrar
+        function mostrarAlerta() {
+            alert("Cadastro realizado com sucesso!");
+        }
+
+        // Aplica o tema ao carregar
+        window.onload = aplicarTema;
+    </script>
+    <style>
+        body.claro {
+            background-color: #f9f9f9;
+            color: #000;
+        }
+        body.escuro {
+            background-color: #222;
+            color: #fff;
+        }
+        label, select, input, button {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro de Usuário</h1>
+    <form action="salvar.php" method="post" onsubmit="mostrarAlerta()">
+        <label>Nome Completo:
+            <input type="text" name="nome" required>
+        </label>
+        <label>Email:
+            <input type="email" name="email" required>
+        </label>
+        <label>Senha:
+            <input type="password" name="senha" required>
+        </label>
+        <label>Idioma Preferido:
+            <select name="idioma">
+                <option value="pt">Português</option>
+                <option value="en">Inglês</option>
+            </select>
+        </label>
+        <label>Tema:
+            <select name="tema" onchange="localStorage.setItem('tema', this.value); aplicarTema();">
+                <option value="claro">Claro</option>
+                <option value="escuro">Escuro</option>
+            </select>
+        </label>
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
